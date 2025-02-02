@@ -16,12 +16,16 @@
             line-height: 1.6;
             color: #333;
             background-color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         header {
             padding: 2rem 1rem;
             max-width: 800px;
             margin: 0 auto;
+            width: 100%;
         }
 
         nav {
@@ -57,6 +61,8 @@
             max-width: 800px;
             margin: 0 auto;
             padding: 0 1rem;
+            flex: 1;
+            width: 100%;
         }
 
         .posts-grid {
@@ -101,12 +107,17 @@
         .post-excerpt {
             color: #666;
             margin-bottom: 1rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
         .read-more {
             color: #2563eb;
             text-decoration: none;
             font-weight: 500;
+            cursor: pointer;
         }
 
         footer {
@@ -114,7 +125,7 @@
             padding: 2rem 1rem;
             color: #666;
             border-top: 1px solid #eee;
-            margin-top: 4rem;
+            margin-top: auto;
         }
 
         .social-links {
@@ -129,6 +140,7 @@
             text-decoration: none;
         }
 
+        /* Mobile Styles */
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
@@ -137,6 +149,20 @@
             .posts-grid {
                 grid-template-columns: 1fr;
             }
+
+            .post-image {
+                height: 150px;
+            }
+        }
+
+        /* Hidden sections */
+        .page-section {
+            display: none;
+            padding: 2rem 0;
+        }
+
+        .active-section {
+            display: block;
         }
     </style>
 </head>
@@ -145,35 +171,62 @@
         <nav>
             <a href="/" class="logo">itzzArshad</a>
             <div class="nav-links">
-                <a href="/blog">Blog</a>
-                <a href="/projects">Projects</a>
-                <a href="/about">About</a>
+                <a href="#blog" class="nav-link">Blog</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#about" class="nav-link">About</a>
             </div>
         </nav>
     </header>
 
     <main>
-        <div class="posts-grid">
-            <article class="post-card">
-                <img src="https://picsum.photos/400/200" alt="Post thumbnail" class="post-image">
-                <div class="post-content">
-                    <div class="post-date">May 15, 2024</div>
-                    <h2 class="post-title">Getting Started with Web Development</h2>
-                    <p class="post-excerpt">Learn the fundamentals of modern web development and start your journey...</p>
-                    <a href="#" class="read-more">Read more →</a>
-                </div>
-            </article>
+        <!-- Blog Section -->
+        <section id="blog" class="page-section active-section">
+            <div class="posts-grid">
+                <!-- Blog Post 1 -->
+                <article class="post-card">
+                    <img src="https://picsum.photos/400/200" alt="Web Development" class="post-image">
+                    <div class="post-content">
+                        <div class="post-date">May 15, 2024</div>
+                        <h2 class="post-title">Getting Started with Web Development</h2>
+                        <p class="post-excerpt">Learn the fundamentals of modern web development and start your journey...</p>
+                        <div class="full-content" style="display: none;">
+                            <p>In this comprehensive guide, we'll cover HTML5, CSS3, and JavaScript fundamentals. You'll learn how to create responsive layouts, work with APIs, and understand basic programming concepts.</p>
+                            <p>We'll also explore popular frameworks like React and Vue.js, and discuss career paths in web development.</p>
+                        </div>
+                        <a class="read-more">Read more →</a>
+                    </div>
+                </article>
 
-            <article class="post-card">
-                <img src="https://picsum.photos/401/200" alt="Post thumbnail" class="post-image">
-                <div class="post-content">
-                    <div class="post-date">May 14, 2024</div>
-                    <h2 class="post-title">UI Design Principles</h2>
-                    <p class="post-excerpt">Essential principles for creating beautiful and functional user interfaces...</p>
-                    <a href="#" class="read-more">Read more →</a>
-                </div>
-            </article>
-        </div>
+                <!-- Blog Post 2 -->
+                <article class="post-card">
+                    <img src="https://picsum.photos/401/200" alt="UI Design" class="post-image">
+                    <div class="post-content">
+                        <div class="post-date">May 14, 2024</div>
+                        <h2 class="post-title">UI Design Principles</h2>
+                        <p class="post-excerpt">Essential principles for creating beautiful and functional user interfaces...</p>
+                        <div class="full-content" style="display: none;">
+                            <p>Discover the key principles of user interface design including color theory, typography, spacing, and user interaction patterns. We'll examine case studies from successful applications and discuss accessibility considerations.</p>
+                            <p>Includes practical exercises using Figma and Adobe XD.</p>
+                        </div>
+                        <a class="read-more">Read more →</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="page-section">
+            <h2>Featured Projects</h2>
+            <div class="posts-grid">
+                <!-- Project cards similar to blog posts -->
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="page-section">
+            <h2>About Me</h2>
+            <p>Full-stack developer with 3+ years of experience in web development...</p>
+        </section>
     </main>
 
     <footer>
@@ -186,19 +239,40 @@
     </footer>
 
     <script>
-        // Sorting posts by date
-        document.addEventListener('DOMContentLoaded', function() {
-            const grid = document.querySelector('.posts-grid');
-            const posts = Array.from(grid.children);
-            
-            posts.sort((a, b) => {
-                const dateA = new Date(a.querySelector('.post-date').textContent);
-                const dateB = new Date(b.querySelector('.post-date').textContent);
-                return dateB - dateA;
+        // Navigation handling
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const sectionId = link.getAttribute('href').substring(1);
+                document.querySelectorAll('.page-section').forEach(section => {
+                    section.classList.remove('active-section');
+                });
+                document.getElementById(sectionId).classList.add('active-section');
             });
-
-            posts.forEach(post => grid.appendChild(post));
         });
+
+        // Read more functionality
+        document.querySelectorAll('.read-more').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const content = e.target.previousElementSibling;
+                content.style.display = content.style.display === 'none' ? 'block' : 'none';
+                e.target.textContent = content.style.display === 'none' ? 'Read more →' : 'Show less';
+            });
+        });
+
+        // Auto-footer positioning
+        function adjustFooter() {
+            if (window.innerHeight > document.body.scrollHeight) {
+                document.querySelector('footer').style.position = 'fixed';
+                document.querySelector('footer').style.bottom = '0';
+                document.querySelector('footer').style.width = '100%';
+            } else {
+                document.querySelector('footer').style.position = 'static';
+            }
+        }
+
+        window.addEventListener('resize', adjustFooter);
+        adjustFooter();
     </script>
 </body>
 </html>
