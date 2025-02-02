@@ -4,77 +4,256 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>itzzArshad</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="animations.css">
-    <link rel="stylesheet" href="mobile.css">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #2563eb;
+            --text: #1f2937;
+            --light-text: #6b7280;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--text);
+            background: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            padding: 1.5rem 1rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--light-text);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .post-card {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .post-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .post-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .post-content {
+            padding: 1.5rem;
+        }
+
+        .post-date {
+            color: var(--light-text);
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .post-title {
+            font-size: 1.125rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .post-excerpt {
+            color: var(--light-text);
+            margin-bottom: 1rem;
+        }
+
+        .read-more {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--light-text);
+            border-top: 1px solid #e5e7eb;
+            margin-top: auto;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .social-links a {
+            color: var(--light-text);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+                cursor: pointer;
+            }
+
+            .hamburger {
+                width: 24px;
+                height: 2px;
+                background: var(--text);
+                margin: 6px 0;
+                transition: 0.3s;
+            }
+
+            .posts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="loader" id="loader"></div>
-    <header data-aos="fade-down">
+    <header>
         <nav>
             <a href="/" class="logo">itzzArshad</a>
+            <div class="nav-links">
+                <a href="#blog">Blog</a>
+                <a href="#projects">Projects</a>
+                <a href="#about">About</a>
+            </div>
             <div class="mobile-menu">
                 <div class="hamburger"></div>
                 <div class="hamburger"></div>
                 <div class="hamburger"></div>
             </div>
-            <div class="nav-links">
-                <a href="#blog" class="nav-link">Blog</a>
-                <a href="#projects" class="nav-link">Projects</a>
-                <a href="#about" class="nav-link">About</a>
-            </div>
         </nav>
     </header>
 
     <main>
-        <section id="blog" class="page-section active-section">
+        <section id="blog">
             <div class="posts-grid">
+                <!-- Post 1 -->
                 <article class="post-card">
-                    <div class="post-inner">
-                        <img src="assets/images/blog-post-1.jpg" alt="Web Development" class="post-image">
-                        <div class="post-content">
-                            <div class="post-date">May 15, 2024</div>
-                            <h2 class="post-title">Getting Started with Web Development</h2>
-                            <p class="post-excerpt">Learn the fundamentals of modern web development...</p>
-                            <div class="full-content">
-                                <p>Detailed content here...</p>
-                            </div>
-                            <a class="read-more">Read more →</a>
-                        </div>
+                    <img src="https://riskarblogs.vercel.app/images/thumbnail1.jpg" alt="Web Development" class="post-image">
+                    <div class="post-content">
+                        <div class="post-date">May 15, 2024</div>
+                        <h2 class="post-title">Modern Web Development</h2>
+                        <p class="post-excerpt">Essential skills for today's web developers.</p>
+                        <a href="#" class="read-more">Read more →</a>
                     </div>
                 </article>
-                <!-- Add more posts -->
+
+                <!-- Post 2 -->
+                <article class="post-card">
+                    <img src="https://riskarblogs.vercel.app/images/thumbnail2.jpg" alt="UI Design" class="post-image">
+                    <div class="post-content">
+                        <div class="post-date">May 14, 2024</div>
+                        <h2 class="post-title">UI Design Patterns</h2>
+                        <p class="post-excerpt">Best practices for interface design.</p>
+                        <a href="#" class="read-more">Read more →</a>
+                    </div>
+                </article>
             </div>
-        </section>
-
-        <section id="projects" class="page-section">
-            <h2>Projects</h2>
-            <!-- Project content -->
-        </section>
-
-        <section id="about" class="page-section">
-            <h2>About Me</h2>
-            <!-- About content -->
         </section>
     </main>
 
-    <footer data-aos="fade-up">
+    <footer>
         <div class="social-links">
-            <a href="https://twitter.com/itzzArshad" target="_blank">
-                <img src="assets/icons/social-twitter.svg" alt="Twitter">
-            </a>
-            <a href="https://github.com/itzzArshad" target="_blank">
-                <img src="assets/icons/social-github.svg" alt="GitHub">
-            </a>
+            <a href="https://twitter.com/itzzArshad" target="_blank">Twitter</a>
+            <a href="https://github.com/itzzArshad" target="_blank">GitHub</a>
+            <a href="mailto:arshad@example.com">Email</a>
         </div>
         <p>© 2024 itzzArshad. All rights reserved.</p>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="main.js"></script>
-    <script src="animations.js"></script>
-    <script src="navigation.js"></script>
+    <script>
+        // Mobile menu toggle
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Close menu on click outside
+        document.addEventListener('click', (e) => {
+            if (!mobileMenu.contains(e.target) && !navLinks.contains(e.target)) {
+                navLinks.style.display = 'none';
+            }
+        });
+
+        // Responsive menu
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                navLinks.style.display = 'flex';
+            } else {
+                navLinks.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>
