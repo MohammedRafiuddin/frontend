@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -70,10 +70,8 @@
             transition: color 0.3s;
         }
 
-        .nav-links a:hover,
-        .nav-links a.active {
+        .nav-links a:hover {
             color: var(--primary);
-            font-weight: 600;
         }
 
         /* Main Content */
@@ -246,7 +244,7 @@
         <nav>
             <a href="/" class="logo">itzzArshad</a>
             <div class="nav-links">
-                <a href="#blog" class="nav-link active">Blog</a>
+                <a href="#blog" class="nav-link">Blog</a>
                 <a href="#projects" class="nav-link">Projects</a>
                 <a href="#about" class="nav-link">About</a>
             </div>
@@ -261,47 +259,36 @@
     <main>
         <section id="blog">
             <div class="posts-grid">
+                <!-- Post 1 -->
                 <article class="post-card" data-aos="zoom-in">
-                    <img src="web-development.jpg" alt="Web Development" class="post-image">
+                    <img src="https://picsum.photos/600/400?random=1" alt="Web Development" class="post-image">
                     <div class="post-content">
                         <div class="post-date">May 15, 2024</div>
                         <h2 class="post-title">Modern Web Development</h2>
                         <p class="post-excerpt">Essential skills for today's web developers.</p>
                         <div class="full-content">
                             <p>Discover the latest trends in web development including modern frameworks, performance optimization, and best practices for building scalable applications.</p>
+                            <p>Learn about React, Vue.js, and modern CSS techniques that will elevate your development skills.</p>
                         </div>
                         <a class="read-more">Read more →</a>
                     </div>
                 </article>
 
+                <!-- Post 2 -->
                 <article class="post-card" data-aos="zoom-in" data-aos-delay="200">
-                    <img src="ui-design.jpg" alt="UI Design" class="post-image">
+                    <img src="https://picsum.photos/600/400?random=2" alt="UI Design" class="post-image">
                     <div class="post-content">
                         <div class="post-date">May 14, 2024</div>
                         <h2 class="post-title">UI Design Patterns</h2>
                         <p class="post-excerpt">Best practices for interface design.</p>
                         <div class="full-content">
-                            <p>Explore fundamental UI design principles that create intuitive and engaging user experiences.</p>
+                            <p>Explore fundamental UI design principles that create intuitive and engaging user experiences. Learn about color theory, typography, and layout design.</p>
+                            <p>Includes practical examples using Figma and real-world case studies.</p>
                         </div>
                         <a class="read-more">Read more →</a>
                     </div>
                 </article>
             </div>
-        </section>
-
-        <section id="projects">
-            <h2>Projects</h2>
-            <p>Here are some of Arshad's recent projects:</p>
-            <ul>
-                <li><strong>Portfolio Website</strong> - A personal portfolio showcasing Arshad's work.</li>
-                <li><strong>Blog Platform</strong> - A minimalistic blog system with a clean UI.</li>
-                <li><strong>Task Manager</strong> - A productivity tool for managing daily tasks.</li>
-            </ul>
-        </section>
-
-        <section id="about">
-            <h2>About Arshad</h2>
-            <p>Arshad is a passionate web developer with expertise in modern web technologies. He specializes in frontend development using React, Vue.js, and CSS frameworks.</p>
         </section>
     </main>
 
@@ -317,28 +304,74 @@
     <!-- Required Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+        // Initialize AOS
         AOS.init({
             duration: 800,
             once: true,
             easing: 'ease-out-cubic'
         });
 
+        // Read More Functionality
         document.querySelectorAll('.read-more').forEach(button => {
             button.addEventListener('click', (e) => {
                 const content = e.target.previousElementSibling;
                 content.style.display = content.style.display === 'none' ? 'block' : 'none';
                 e.target.textContent = content.style.display === 'none' ? 'Read more →' : 'Show less';
+                
+                // Animate content expansion
+                gsap.from(content, {
+                    duration: 0.3,
+                    height: 0,
+                    opacity: 0,
+                    ease: "power2.out"
+                });
             });
         });
 
-        const navLinks = document.querySelectorAll('.nav-links a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.forEach(nav => nav.classList.remove('active'));
-                link.classList.add('active');
+        // Mobile Menu
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+        const hamburgers = document.querySelectorAll('.hamburger');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            
+            // Animate hamburger
+            hamburgers.forEach((bar, index) => {
+                if (navLinks.classList.contains('active')) {
+                    gsap.to(bar, {
+                        rotation: index === 0 ? 45 : index === 2 ? -45 : 0,
+                        y: index === 0 ? 8 : index === 2 ? -8 : 0,
+                        opacity: index === 1 ? 0 : 1,
+                        duration: 0.3
+                    });
+                } else {
+                    gsap.to(bar, {
+                        rotation: 0,
+                        y: 0,
+                        opacity: 1,
+                        duration: 0.3
+                    });
+                }
             });
         });
 
+        // Close menu on click outside
+        document.addEventListener('click', (e) => {
+            if (!mobileMenu.contains(e.target) && !navLinks.contains(e.target)) {
+                navLinks.classList.remove('active');
+                hamburgers.forEach(bar => {
+                    gsap.to(bar, {
+                        rotation: 0,
+                        y: 0,
+                        opacity: 1,
+                        duration: 0.3
+                    });
+                });
+            }
+        });
+
+        // Page Load Animation
         window.addEventListener('load', () => {
             gsap.to("#loader", {
                 opacity: 0,
