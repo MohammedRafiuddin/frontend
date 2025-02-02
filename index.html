@@ -4,225 +4,77 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>itzzArshad</title>
-    
-    <!-- Animation Libraries -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="animations.css">
+    <link rel="stylesheet" href="mobile.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    
-    <style>
-        /* Existing styles remain, add these new ones */
-        
-        /* Loader Animation */
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-        .loader {
-            width: 40px;
-            height: 40px;
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #2563eb;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 2rem auto;
-        }
-
-        /* Hover Effects */
-        .post-card {
-            perspective: 1000px;
-        }
-
-        .post-inner {
-            transition: transform 0.6s;
-            transform-style: preserve-3d;
-        }
-
-        .post-card:hover .post-inner {
-            transform: rotateY(10deg) rotateX(5deg) translateY(-5px);
-        }
-
-        /* Image Load Animation */
-        .post-image {
-            opacity: 0;
-            transform: scale(0.95);
-            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        .post-image.loaded {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        /* Section Transitions */
-        .page-section {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease-out;
-        }
-
-        .page-section.active-section {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Mobile Menu Animations */
-        .nav-links {
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        /* Gradient Background Animation */
-        body::before {
-            content: '';
-            position: fixed;
-            top: -50%;
-            left: -50%;
-            right: -50%;
-            bottom: -50%;
-            background: linear-gradient(45deg, #f3f4f6 0%, #e5e7eb 100%);
-            z-index: -1;
-            animation: gradientMove 20s ease infinite;
-        }
-
-        @keyframes gradientMove {
-            0% { transform: translate(0, 0); }
-            25% { transform: translate(-5%, 5%); }
-            50% { transform: translate(5%, -5%); }
-            75% { transform: translate(-5%, -5%); }
-            100% { transform: translate(0, 0); }
-        }
-    </style>
 </head>
 <body>
-    <!-- Add loader -->
     <div class="loader" id="loader"></div>
-
-    <header data-aos="fade-down" data-aos-duration="800">
-        <!-- Existing header content -->
+    <header data-aos="fade-down">
+        <nav>
+            <a href="/" class="logo">itzzArshad</a>
+            <div class="mobile-menu">
+                <div class="hamburger"></div>
+                <div class="hamburger"></div>
+                <div class="hamburger"></div>
+            </div>
+            <div class="nav-links">
+                <a href="#blog" class="nav-link">Blog</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#about" class="nav-link">About</a>
+            </div>
+        </nav>
     </header>
 
     <main>
-        <!-- Sections with animation attributes -->
-        <section id="blog" class="page-section" data-aos="zoom-out" data-aos-delay="200">
-            <!-- Blog content -->
+        <section id="blog" class="page-section active-section">
+            <div class="posts-grid">
+                <article class="post-card">
+                    <div class="post-inner">
+                        <img src="assets/images/blog-post-1.jpg" alt="Web Development" class="post-image">
+                        <div class="post-content">
+                            <div class="post-date">May 15, 2024</div>
+                            <h2 class="post-title">Getting Started with Web Development</h2>
+                            <p class="post-excerpt">Learn the fundamentals of modern web development...</p>
+                            <div class="full-content">
+                                <p>Detailed content here...</p>
+                            </div>
+                            <a class="read-more">Read more →</a>
+                        </div>
+                    </div>
+                </article>
+                <!-- Add more posts -->
+            </div>
         </section>
 
-        <!-- Other sections -->
+        <section id="projects" class="page-section">
+            <h2>Projects</h2>
+            <!-- Project content -->
+        </section>
+
+        <section id="about" class="page-section">
+            <h2>About Me</h2>
+            <!-- About content -->
+        </section>
     </main>
 
-    <footer data-aos="fade-up" data-aos-anchor-placement="top-bottom">
-        <!-- Footer content -->
+    <footer data-aos="fade-up">
+        <div class="social-links">
+            <a href="https://twitter.com/itzzArshad" target="_blank">
+                <img src="assets/icons/social-twitter.svg" alt="Twitter">
+            </a>
+            <a href="https://github.com/itzzArshad" target="_blank">
+                <img src="assets/icons/social-github.svg" alt="GitHub">
+            </a>
+        </div>
+        <p>© 2024 itzzArshad. All rights reserved.</p>
     </footer>
 
-    <!-- Add these scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        // Initialize AOS
-        AOS.init({
-            once: true,
-            duration: 800,
-            easing: 'ease-out-quad'
-        });
-
-        // Image load animation
-        document.querySelectorAll('.post-image').forEach(img => {
-            if (img.complete) {
-                img.classList.add('loaded');
-            } else {
-                img.addEventListener('load', () => {
-                    img.classList.add('loaded');
-                });
-            }
-        });
-
-        // GSAP Animations
-        gsap.from(".logo", {
-            duration: 1.5,
-            opacity: 0,
-            y: -20,
-            ease: "power4.out"
-        });
-
-        // Hamburger menu animation
-        const hamburgers = document.querySelectorAll('.hamburger');
-        gsap.set(hamburgers, {transformOrigin: "50% 50%"});
-
-        // Page transition loader
-        window.addEventListener('DOMContentLoaded', () => {
-            gsap.to("#loader", {
-                opacity: 0,
-                duration: 0.5,
-                delay: 0.5,
-                onComplete: () => {
-                    document.getElementById("loader").style.display = "none";
-                }
-            });
-        });
-
-        // Enhanced mobile menu animation
-        const mobileMenu = document.querySelector('.mobile-menu');
-        const navLinks = document.querySelector('.nav-links');
-
-        mobileMenu.addEventListener('click', () => {
-            if (navLinks.classList.contains('active')) {
-                gsap.to(navLinks, {
-                    duration: 0.3,
-                    opacity: 0,
-                    y: -10,
-                    onComplete: () => navLinks.classList.remove('active')
-                });
-                gsap.to(hamburgers, {
-                    rotation: 0,
-                    duration: 0.3
-                });
-            } else {
-                navLinks.classList.add('active');
-                gsap.fromTo(navLinks, 
-                    { opacity: 0, y: -10 },
-                    { opacity: 1, y: 0, duration: 0.3 }
-                );
-                gsap.to(hamburgers[0], {
-                    rotation: 45,
-                    y: 6,
-                    duration: 0.3
-                });
-                gsap.to(hamburgers[1], {
-                    opacity: 0,
-                    duration: 0.2
-                });
-                gsap.to(hamburgers[2], {
-                    rotation: -45,
-                    y: -6,
-                    duration: 0.3
-                });
-            }
-        });
-
-        // 3D hover effect
-        document.querySelectorAll('.post-card').forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                
-                gsap.to(card.querySelector('.post-inner'), {
-                    duration: 0.5,
-                    rotationY: (x - centerX) / 10,
-                    rotationX: -(y - centerY) / 10,
-                    ease: "power2.out"
-                });
-            });
-
-            card.addEventListener('mouseleave', () => {
-                gsap.to(card.querySelector('.post-inner'), {
-                    duration: 0.5,
-                    rotationY: 0,
-                    rotationX: 0,
-                    ease: "power2.out"
-                });
-            });
-        });
-    </script>
+    <script src="main.js"></script>
+    <script src="animations.js"></script>
+    <script src="navigation.js"></script>
 </body>
 </html>
