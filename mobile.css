@@ -1,0 +1,13 @@
+@media (max-width: 768px) {
+    header {
+        padding: 1rem;
+    }
+
+    .mobile-menu {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+    }
+}
