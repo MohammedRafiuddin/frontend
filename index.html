@@ -1,275 +1,97 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>itzzArshad</title>
-    
-    <!-- Animation Libraries -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    
-    <style>
-        /* Previous styles remain, these are additions/modifications */
-        .nav-links a.active {
-            color: var(--primary);
-            font-weight: 600;
-        }
+<!-- In HEAD section add -->
+<style>
+    /* Add active state for blog link */
+    .nav-links a.active {
+        color: var(--primary);
+        font-weight: 600;
+    }
 
-        .project-card {
-            background: #f8fafc;
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin: 2rem 0;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
+    /* Fix content shift */
+    .full-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+    }
+</style>
 
-        .tech-stack {
-            display: flex;
-            gap: 0.5rem;
-            margin-top: 1rem;
-            flex-wrap: wrap;
-        }
+<!-- Update navigation links -->
+<div class="nav-links">
+    <a href="#blog" class="nav-link active">Blog</a>
+    <a href="#projects" class="nav-link">Projects</a>
+    <a href="#about" class="nav-link">About</a>
+</div>
 
-        .tech-badge {
-            background: #e0e7ff;
-            color: var(--primary);
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.875rem;
-        }
-
-        .about-content {
-            line-height: 1.8;
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 1.5rem;
-            background: #f8fafc;
-            border-radius: 8px;
-        }
-
-        .full-content {
-            display: none;
-            padding-top: 1rem;
-            margin-top: 1rem;
-            border-top: 1px solid #e5e7eb;
-        }
-    </style>
-</head>
-<body>
-    <div class="loader" id="loader"></div>
-
-    <header data-aos="fade-down">
-        <nav>
-            <a href="/" class="logo">itzzArshad</a>
-            <div class="nav-links">
-                <a href="#blog" class="nav-link active">Blog</a>
-                <a href="#projects" class="nav-link">Projects</a>
-                <a href="#about" class="nav-link">About</a>
-            </div>
-            <div class="mobile-menu">
-                <div class="hamburger"></div>
-                <div class="hamburger"></div>
-                <div class="hamburger"></div>
-            </div>
-        </nav>
-    </header>
-
-    <main>
-        <!-- Blog Section -->
-        <section id="blog">
-            <div class="posts-grid">
-                <article class="post-card" data-aos="zoom-in">
-                    <img src="https://picsum.photos/id/1005/600/400" alt="Web Development" class="post-image">
-                    <div class="post-content">
-                        <div class="post-date">May 15, 2024</div>
-                        <h2 class="post-title">Modern Web Development</h2>
-                        <p class="post-excerpt">Essential skills for today's web developers...</p>
-                        <div class="full-content">
-                            <p>Full-stack development requires understanding both frontend and backend technologies. This post covers:</p>
-                            <ul>
-                                <li>React & Vue.js fundamentals</li>
-                                <li>Node.js and Express server setup</li>
-                                <li>Database management with MongoDB</li>
-                                <li>Deployment strategies</li>
-                            </ul>
-                        </div>
-                        <a class="read-more">Read more →</a>
-                    </div>
-                </article>
-
-                <article class="post-card" data-aos="zoom-in" data-aos-delay="200">
-                    <img src="https://picsum.photos/id/1025/600/400" alt="UI Design" class="post-image">
-                    <div class="post-content">
-                        <div class="post-date">May 14, 2024</div>
-                        <h2 class="post-title">UI Design Patterns</h2>
-                        <p class="post-excerpt">Best practices for interface design...</p>
-                        <div class="full-content">
-                            <p>Key principles for effective UI design:</p>
-                            <ul>
-                                <li>Consistency in design elements</li>
-                                <li>Proper use of white space</li>
-                                <li>Accessibility considerations</li>
-                                <li>Mobile-first approach</li>
-                            </ul>
-                        </div>
-                        <a class="read-more">Read more →</a>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <!-- Projects Section -->
-        <section id="projects" class="page-section" style="display: none;">
-            <div data-aos="fade-up">
-                <h2>Featured Projects</h2>
-                <div class="project-card">
-                    <h3>E-Commerce Platform</h3>
-                    <p>Full-stack shopping platform with React frontend and Node.js backend</p>
-                    <div class="tech-stack">
-                        <span class="tech-badge">React</span>
-                        <span class="tech-badge">Node.js</span>
-                        <span class="tech-badge">MongoDB</span>
-                    </div>
-                </div>
-                <div class="project-card" data-aos="fade-up" data-aos-delay="200">
-                    <h3>Portfolio Builder</h3>
-                    <p>Interactive portfolio generator with customizable templates</p>
-                    <div class="tech-stack">
-                        <span class="tech-badge">Vue.js</span>
-                        <span class="tech-badge">Firebase</span>
-                        <span class="tech-badge">SCSS</span>
-                    </div>
+<!-- Add Projects and About sections -->
+<section id="projects" style="display: none;">
+    <div class="posts-grid">
+        <article class="post-card" data-aos="zoom-in">
+            <div class="post-content">
+                <h2 class="post-title">Recent Projects</h2>
+                <div class="full-content" style="max-height: none; display: block;">
+                    <p>🔹 E-Commerce Platform - Full-stack solution with React & Node.js</p>
+                    <p>🔹 Portfolio Builder - Customizable templates with CMS integration</p>
                 </div>
             </div>
-        </section>
+        </article>
+    </div>
+</section>
 
-        <!-- About Section -->
-        <section id="about" class="page-section" style="display: none;">
-            <div class="about-content" data-aos="fade-up">
-                <h2>About Arshad</h2>
-                <p>👋 Hi, I'm Arshad! A passionate full-stack developer with 3+ years of experience in building web applications. I specialize in:</p>
-                <ul>
-                    <li>Modern JavaScript frameworks (React, Vue, Angular)</li>
-                    <li>Backend development with Node.js and Python</li>
-                    <li>Cloud technologies (AWS, Firebase)</li>
-                    <li>UI/UX design principles</li>
-                </ul>
-                <p>When I'm not coding, you can find me contributing to open-source projects or exploring new technologies in the web development space.</p>
+<section id="about" style="display: none;">
+    <div class="posts-grid">
+        <article class="post-card" data-aos="zoom-in">
+            <div class="post-content">
+                <h2 class="post-title">About Arshad</h2>
+                <div class="full-content" style="max-height: none; display: block;">
+                    <p>Full-stack developer specializing in modern web technologies with 3+ years of experience. Passionate about building scalable applications and open-source contributions.</p>
+                </div>
             </div>
-        </section>
-    </main>
+        </article>
+    </div>
+</section>
 
-    <footer data-aos="fade-up">
-        <div class="social-links">
-            <a href="https://twitter.com/itzzArshad" target="_blank">Twitter</a>
-            <a href="https://github.com/itzzArshad" target="_blank">GitHub</a>
-            <a href="mailto:arshad@example.com">Email</a>
-        </div>
-        <p>© 2024 itzzArshad. All rights reserved.</p>
-    </footer>
+<!-- Update images to fixed URLs -->
+<img src="https://picsum.photos/id/1005/600/400" alt="Web Development" class="post-image">
+<img src="https://picsum.photos/id/1025/600/400" alt="UI Design" class="post-image">
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        // Initialize AOS
-        AOS.init({
-            duration: 800,
-            once: true,
-            easing: 'ease-out-cubic'
-        });
+<!-- Update JavaScript -->
+<script>
+    // Read More Functionality (no layout shift)
+    document.querySelectorAll('.read-more').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const content = e.target.previousElementSibling;
+            const isExpanded = content.style.maxHeight === 'none';
 
-        // Read More Functionality (no layout shift)
-        document.querySelectorAll('.read-more').forEach(button => {
-            button.addEventListener('click', (e) => {
-                const content = e.target.previousElementSibling;
-                const isExpanded = content.style.display === 'block';
-                
-                gsap.to(content, {
-                    height: isExpanded ? 0 : 'auto',
-                    opacity: isExpanded ? 0 : 1,
-                    duration: 0.3,
-                    ease: "power2.out",
-                    onComplete: () => {
-                        content.style.display = isExpanded ? 'none' : 'block';
-                        e.target.textContent = isExpanded ? 'Read more →' : 'Show less';
-                    }
-                });
-            });
-        });
-
-        // Navigation handling
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const sectionId = link.getAttribute('href').substring(1);
-                
-                // Hide all sections
-                document.querySelectorAll('.page-section').forEach(section => {
-                    section.style.display = 'none';
-                });
-                
-                // Show selected section
-                document.getElementById(sectionId).style.display = 'block';
-                
-                // Update active class
-                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-                link.classList.add('active');
-                
-                // Mobile menu close
-                if (window.innerWidth <= 768) {
-                    navLinks.classList.remove('active');
-                    hamburgers.forEach(bar => {
-                        gsap.to(bar, {
-                            rotation: 0,
-                            y: 0,
-                            opacity: 1,
-                            duration: 0.3
-                        });
-                    });
-                }
-            });
-        });
-
-        // Mobile Menu
-        const mobileMenu = document.querySelector('.mobile-menu');
-        const navLinks = document.querySelector('.nav-links');
-        const hamburgers = document.querySelectorAll('.hamburger');
-
-        mobileMenu.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            
-            hamburgers.forEach((bar, index) => {
-                if (navLinks.classList.contains('active')) {
-                    gsap.to(bar, {
-                        rotation: index === 0 ? 45 : index === 2 ? -45 : 0,
-                        y: index === 0 ? 8 : index === 2 ? -8 : 0,
-                        opacity: index === 1 ? 0 : 1,
-                        duration: 0.3
-                    });
-                } else {
-                    gsap.to(bar, {
-                        rotation: 0,
-                        y: 0,
-                        opacity: 1,
-                        duration: 0.3
-                    });
-                }
-            });
-        });
-
-        // Page Load Animation
-        window.addEventListener('load', () => {
-            gsap.to("#loader", {
-                opacity: 0,
-                duration: 0.5,
+            gsap.to(content, {
+                maxHeight: isExpanded ? '0' : '1000px',
+                duration: 0.3,
+                ease: "power2.out",
                 onComplete: () => {
-                    document.getElementById("loader").remove();
+                    e.target.textContent = isExpanded ? 'Read more →' : 'Show less';
                 }
             });
         });
+    });
 
-        // Initialize blog as active section
-        document.querySelector('.nav-link.active').click();
-    </script>
-</body>
-</html>
+    // Navigation handling
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const sectionId = link.getAttribute('href').substring(1);
+            
+            // Hide all sections
+            document.querySelectorAll('section').forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).style.display = 'block';
+            
+            // Update active class
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+        });
+    });
+
+    // Initialize blog as active section
+    document.querySelector('#blog').style.display = 'block';
+</script>
